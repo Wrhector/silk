@@ -110,7 +110,7 @@ class SilkyMiddleware(object):
                 silk_response.save()
                 silk_request.end_time = timezone.now()
                 collector.finalise()
-            else:
+            elif not (400 < response.status_code < 500):
                 Logger.error('No request model was available when processing response. '
                              'Did something go wrong in process_request/process_view?'
                              '\n' + str(request) + '\n\n' + str(response))
